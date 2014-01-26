@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_DetailRS1" value="name:profession_id;datatype:int,name:memberid;datatype:int,name:profession_name;datatype:string,name:profession_start;datatype:string,name:profession_end;datatype:string,name:company_name;datatype:string,name:memberid;datatype:int,name:lastname;datatype:string,name:middlename;datatype:string,name:firstname;datatype:string,name:dateofbirth;datatype:string,name:genderid;datatype:blob,name:admissiondate;datatype:string,name:identificationnumber;datatype:int,name:localityid;datatype:int,name:statusid;datatype:int" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

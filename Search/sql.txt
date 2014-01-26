@@ -1,0 +1,99 @@
+-- phpMyAdmin SQL Dump
+-- version 2.7.0-pl2
+-- http://www.phpmyadmin.net
+-- 
+-- Host: localhost
+-- Generation Time: Dec 26, 2007 at 11:45 PM
+-- Server version: 5.0.21
+-- PHP Version: 5.1.2
+-- 
+-- Database: `amit`
+-- 
+
+-- --------------------------------------------------------
+
+-- 
+-- Table structure for table `click_records`
+-- 
+
+CREATE TABLE `click_records` (
+  `id` int(10) NOT NULL auto_increment,
+  `keyword` varchar(200) default NULL,
+  `advertiser_id` varchar(50) default '0',
+  `advertisement_id` varchar(40) default NULL,
+  `campaign_id` int(10) default NULL,
+  `clicks` varchar(1000) NOT NULL,
+  `click_date` date default NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=68 ;
+
+-- 
+-- Dumping data for table `click_records`
+-- 
+
+INSERT INTO `click_records` VALUES (1, 'acting', '57', '1', 1, '77', '2007-07-31');
+INSERT INTO `click_records` VALUES (2, 'art', '57', '1', 1, '37', '2007-07-31');
+INSERT INTO `click_records` VALUES (3, 'art', '57', '1', 1, '18', '2007-09-22');
+INSERT INTO `click_records` VALUES (4, 'acting', '57', '1', 1, '43', '2007-09-21');
+INSERT INTO `click_records` VALUES (5, 'art', '57', '1', 1, '25', '2007-07-31');
+INSERT INTO `click_records` VALUES (6, 'out', '51', '11', 52, '18', '2007-09-27');
+INSERT INTO `click_records` VALUES (7, 'out', '51', '11', 52, '98', '2007-09-27');
+INSERT INTO `click_records` VALUES (8, 'out', '51', '11', 52, '68', '2007-09-27');
+INSERT INTO `click_records` VALUES (9, 'out', '51', '11', 52, '12', '2007-09-27');
+INSERT INTO `click_records` VALUES (10, 'are', '51', '11', 52, '19', '2007-09-27');
+INSERT INTO `click_records` VALUES (11, 'are', '51', '11', 52, '23', '2007-09-27');
+INSERT INTO `click_records` VALUES (12, 'are', '51', '11', 52, '24', '2007-09-27');
+INSERT INTO `click_records` VALUES (13, 'are', '51', '11', 52, '16', '2007-09-27');
+INSERT INTO `click_records` VALUES (14, 'are', '51', '11', 52, '71', '2007-09-27');
+INSERT INTO `click_records` VALUES (15, 'are', '51', '11', 52, '72', '2007-09-27');
+INSERT INTO `click_records` VALUES (16, 'are', '51', '11', 52, '11', '2007-09-27');
+INSERT INTO `click_records` VALUES (17, 'networks', '51', '11', 52, '06', '2007-09-27');
+INSERT INTO `click_records` VALUES (18, 'networks', '51', '11', 52, '58', '2007-09-27');
+INSERT INTO `click_records` VALUES (19, 'are', '51', '11', 52, '39', '2007-09-27');
+INSERT INTO `click_records` VALUES (20, 'networks', '51', '11', 52, '84', '2007-09-27');
+INSERT INTO `click_records` VALUES (21, 'is', '59', '12', 52, '69', '2007-09-27');
+INSERT INTO `click_records` VALUES (22, 'is', '59', '12', 52, '57', '2007-09-27');
+INSERT INTO `click_records` VALUES (23, 'out', '51', '11', 52, '41', '2007-09-27');
+INSERT INTO `click_records` VALUES (24, 'networks', '51', '11', 52, '99', '2007-09-28');
+INSERT INTO `click_records` VALUES (25, 'are', '51', '11', 52, '37', '2007-09-28');
+INSERT INTO `click_records` VALUES (26, 'out', '51', '11', 52, '52', '2007-09-28');
+INSERT INTO `click_records` VALUES (27, 'is', '59', '12', 52, '26', '2007-09-28');
+INSERT INTO `click_records` VALUES (28, 'out', '51', '11', 52, '72', '2007-09-28');
+INSERT INTO `click_records` VALUES (29, 'is', '59', '12', 52, '89', '2007-09-28');
+INSERT INTO `click_records` VALUES (30, 'out', '51', '11', 52, '92', '2007-09-28');
+INSERT INTO `click_records` VALUES (31, 'out', '51', '11', 52, '57', '2007-09-28');
+INSERT INTO `click_records` VALUES (32, 'are', '51', '11', 52, '74', '2007-09-28');
+INSERT INTO `click_records` VALUES (33, 'are', '51', '11', 52, '65', '2007-09-28');
+INSERT INTO `click_records` VALUES (34, 'are', '51', '11', 52, '65', '2007-09-28');
+INSERT INTO `click_records` VALUES (35, 'are', '51', '11', 52, '93', '2007-09-28');
+INSERT INTO `click_records` VALUES (36, 'are', '51', '11', 52, '38', '2007-09-28');
+INSERT INTO `click_records` VALUES (37, 'are', '51', '11', 52, '74', '2007-09-28');
+INSERT INTO `click_records` VALUES (38, 'are', '51', '11', 52, '21', '2007-09-28');
+INSERT INTO `click_records` VALUES (39, 'out', '51', '11', 52, '47', '2007-09-28');
+INSERT INTO `click_records` VALUES (40, 'networks', '51', '11', 52, '36', '2007-09-28');
+INSERT INTO `click_records` VALUES (41, 'are', '51', '11', 52, '04', '2007-09-28');
+INSERT INTO `click_records` VALUES (42, 'out', '51', '11', 52, '76', '2007-09-28');
+INSERT INTO `click_records` VALUES (43, 'is', '59', '12', 52, '33', '2007-09-28');
+INSERT INTO `click_records` VALUES (44, 'out', '51', '11', 52, '04', '2007-09-28');
+INSERT INTO `click_records` VALUES (45, 'movie', '58', '13', 53, '82', '2007-09-29');
+INSERT INTO `click_records` VALUES (46, 'movie', '58', '13', 53, '62', '2007-09-29');
+INSERT INTO `click_records` VALUES (47, 'mobile', '58', '13', 53, '07', '2007-09-29');
+INSERT INTO `click_records` VALUES (48, 'mobile', '58', '13', 53, '31', '2007-09-29');
+INSERT INTO `click_records` VALUES (50, 'fun', '58', '13', 53, '29', '2007-09-29');
+INSERT INTO `click_records` VALUES (51, 'mobile', '58', '13', 53, '17', '2007-10-09');
+INSERT INTO `click_records` VALUES (52, 'mobile', '58', '13', 53, '63', '2007-10-09');
+INSERT INTO `click_records` VALUES (53, 'is', '59', '12', 49, '29', '2007-10-09');
+INSERT INTO `click_records` VALUES (54, 'is', '59', '12', 49, '21', '2007-10-09');
+INSERT INTO `click_records` VALUES (55, 'are', '51', '11', 49, '81', '2007-10-09');
+INSERT INTO `click_records` VALUES (56, 'art', '57', '1', 49, '05', '2007-10-09');
+INSERT INTO `click_records` VALUES (57, 'are', '51', '11', 49, '35', '2007-10-09');
+INSERT INTO `click_records` VALUES (58, 'are', '51', '11', 54, '69', '2007-10-09');
+INSERT INTO `click_records` VALUES (59, 'painting', '57', '9', 54, '33', '2007-10-09');
+INSERT INTO `click_records` VALUES (60, 'painting', '57', '9', 54, '72', '2007-10-09');
+INSERT INTO `click_records` VALUES (61, 'culture', '57', '9', 54, '24', '2007-10-09');
+INSERT INTO `click_records` VALUES (62, 'are', '51', '11', 54, '68', '2007-10-09');
+INSERT INTO `click_records` VALUES (63, 'are', '51', '11', 54, '32', '2007-10-09');
+INSERT INTO `click_records` VALUES (64, 'was', '57', '3', 54, '72', '2007-10-10');
+INSERT INTO `click_records` VALUES (65, 'is', '59', '12', 54, '68', '2007-10-12');
+INSERT INTO `click_records` VALUES (66, 'movie', '58', '13', 57, '74', '2007-11-20');
+INSERT INTO `click_records` VALUES (67, 'movie', '58', '13', 57, '89', '2007-11-22');

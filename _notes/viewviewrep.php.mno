@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_DetailRS1" value="name:representative_id;datatype:int,name:localityid;datatype:int,name:residence_chair;datatype:string,name:residence_secretary;datatype:string,name:residence_treasurer;datatype:string" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

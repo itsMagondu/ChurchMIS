@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_thispic" value="name:church_doc_id;datatype:int,name:doc_title;datatype:string,name:church_doc_name;datatype:string" />
+</info>

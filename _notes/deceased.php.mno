@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:departedid;datatype:int,name:memberid;datatype:int,name:deathcert_no;datatype:int,name:date;datatype:string,name:cause;datatype:string" />
+	<infoitem key="UD_adddeceased" value="name:departedid;datatype:int,name:memberid;datatype:int,name:deathcert_no;datatype:int,name:date;datatype:string,name:cause;datatype:string" />
+	<infoitem key="UD_editdeceased" value="name:departedid;datatype:int,name:memberid;datatype:int,name:deathcert_no;datatype:int,name:date;datatype:string,name:cause;datatype:string" />
+	<infoitem key="UD_viewdeceased" value="name:departedid;datatype:int,name:memberid;datatype:int,name:deathcert_no;datatype:int,name:date;datatype:string,name:cause;datatype:string" />
+	<infoitem key="UD_addleader" value="name:memberid;datatype:int,name:lastname;datatype:string,name:middlename;datatype:string,name:firstname;datatype:string,name:dateofbirth;datatype:string,name:genderid;datatype:blob,name:admissiondate;datatype:string,name:identificationnumber;datatype:int,name:localityid;datatype:int,name:statusid;datatype:int" />
+</info>

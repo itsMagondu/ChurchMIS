@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addlocality" value="name:localityid;datatype:int,name:locationname;datatype:string,name:locationdescription;datatype:string" />
+	<infoitem key="UD_editlocality" value="name:localityid;datatype:int,name:locationname;datatype:string,name:locationdescription;datatype:string" />
+	<infoitem key="UD_viewlocality" value="name:localityid;datatype:int,name:locationname;datatype:string,name:locationdescription;datatype:string" />
+	<infoitem key="UD_addmember" value="name:memberid;datatype:int,name:departedid;datatype:int,name:lastname;datatype:string,name:middlename;datatype:string,name:firstname;datatype:string,name:dateofbirth;datatype:string,name:genderid;datatype:blob,name:admissiondate;datatype:string,name:identificationnumber;datatype:int,name:localityid;datatype:int,name:department_id;datatype:int,name:statusid;datatype:int,name:leaderid;datatype:int,name:deathcert_no;datatype:string,name:date;datatype:string,name:demice_date;datatype:string,name:cause;datatype:string" />
+	<infoitem key="UD_editrepresentative" value="name:representative_id;datatype:int,name:localityid;datatype:int,name:residence_chair;datatype:int,name:residence_secretary;datatype:int,name:residence_treasurer;datatype:int" />
+	<infoitem key="UD_viewrepresentative" value="name:representative_id;datatype:int,name:localityid;datatype:int,name:residence_chair;datatype:int,name:residence_secretary;datatype:int,name:residence_treasurer;datatype:int,name:localityid;datatype:int,name:locationname;datatype:string,name:locationdescription;datatype:string,name:locationmission;datatype:string" />
+</info>

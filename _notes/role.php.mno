@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addrole" value="name:roleid;datatype:int,name:rolename;datatype:string,name:roledescription;datatype:string" />
+	<infoitem key="UD_editroles" value="name:roleid;datatype:int,name:rolename;datatype:string,name:roledescription;datatype:string" />
+	<infoitem key="UD_viewroles" value="name:roleid;datatype:int,name:rolename;datatype:string,name:roledescription;datatype:string" />
+</info>

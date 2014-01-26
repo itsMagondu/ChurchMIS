@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addstatus" value="name:statusid;datatype:int,name:statusname;datatype:string,name:statusdescription;datatype:string" />
+	<infoitem key="UD_addlocality" value="name:localityid;datatype:int,name:locationname;datatype:string,name:locationdescription;datatype:string,name:locationmission;datatype:string" />
+</info>

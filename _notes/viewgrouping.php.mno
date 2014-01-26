@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_DetailRS1" value="name:grouping_id;datatype:int,name:grouping_name;datatype:string,name:grouping_description;datatype:string" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

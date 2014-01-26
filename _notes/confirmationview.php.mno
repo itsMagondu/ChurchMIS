@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_DetailRS1" value="name:confirmation  _id;datatype:int,name:member_id;datatype:int,name:baptism_date;datatype:string,name:confirmation  _date;datatype:string,name:marriage_date;datatype:string,name:baptised_by;datatype:string,name:confirmed_by;datatype:string,name:wedded_by;datatype:string" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

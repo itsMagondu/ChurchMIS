@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addequipment" value="name:equipment_id;datatype:int,name:equipment_name;datatype:string,name:equipment_hirecost;datatype:string" />
+	<infoitem key="UD_editequipment" value="name:equipment_id;datatype:int,name:equipment_name;datatype:string,name:equipment_hirecost;datatype:string" />
+	<infoitem key="UD_viewequipment" value="name:equipment_id;datatype:int,name:equipment_name;datatype:string,name:equipment_hirecost;datatype:string" />
+</info>

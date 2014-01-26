@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:hobby_id;datatype:int,name:memberid;datatype:int,name:hobby_name;datatype:string,name:intrests;datatype:string,name:special_skills;datatype:string" />
+	<infoitem key="UD_addhobby" value="name:hobby_id;datatype:int,name:memberid;datatype:int,name:hobby_name;datatype:string,name:intrests;datatype:string,name:special_skills;datatype:string" />
+	<infoitem key="UD_viewhobby" value="name:hobby_id;datatype:int,name:memberid;datatype:int,name:hobby_name;datatype:string,name:intrests;datatype:string,name:special_skills;datatype:string" />
+	<infoitem key="UD_edithobby" value="name:hobby_id;datatype:int,name:memberid;datatype:int,name:hobby_name;datatype:string,name:intrests;datatype:string,name:special_skills;datatype:string" />
+</info>

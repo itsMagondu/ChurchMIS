@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:memberid;datatype:int,name:lastname;datatype:string,name:middlename;datatype:string,name:firstname;datatype:string,name:dateofbirth;datatype:string,name:genderid;datatype:blob,name:admissiondate;datatype:string,name:identificationnumber;datatype:int,name:localityid;datatype:int,name:statusid;datatype:int" />
+	<infoitem key="UD_addmarriage" value="name:marriageid;datatype:int,name:husbandname;datatype:int,name:wifename;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:marriagecert_no;datatype:int" />
+	<infoitem key="UD_addleader" value="name:leaderid;datatype:int,name:memberid;datatype:int,name:roleid;datatype:int,name:comission_date;datatype:string" />
+	<infoitem key="UD_editmarriage" value="name:marriageid;datatype:int,name:husbandname;datatype:int,name:wifename;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:marriagecert_no;datatype:int" />
+	<infoitem key="UD_viewmarriage" value="name:marriageid;datatype:int,name:husbandname;datatype:int,name:wifename;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:marriagecert_no;datatype:int" />
+</info>

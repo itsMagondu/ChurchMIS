@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:baptismid;datatype:int,name:memberid;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:baptismcert_no;datatype:int" />
+	<infoitem key="UD_viewbaptism" value="name:baptismid;datatype:int,name:memberid;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:baptismcert_no;datatype:int" />
+	<infoitem key="UD_editbaptism" value="name:baptismid;datatype:int,name:memberid;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:baptismcert_no;datatype:int" />
+	<infoitem key="UD_addleader" value="name:baptismid;datatype:int,name:memberid;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:baptismcert_no;datatype:int" />
+	<infoitem key="UD_addbaptism" value="name:baptismid;datatype:int,name:memberid;datatype:int,name:date;datatype:string,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:baptismcert_no;datatype:int" />
+</info>

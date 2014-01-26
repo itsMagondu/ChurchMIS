@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:service_attendedid;datatype:int,name:memberid;datatype:int,name:service_name;datatype:string,name:church_attendance;datatype:string" />
+	<infoitem key="UD_addservice" value="name:service_attendedid;datatype:int,name:memberid;datatype:int,name:service_name;datatype:string,name:church_attendance;datatype:string" />
+	<infoitem key="UD_editservice" value="name:service_attendedid;datatype:int,name:memberid;datatype:int,name:service_name;datatype:string,name:church_attendance;datatype:string" />
+	<infoitem key="UD_viewservice" value="name:service_attendedid;datatype:int,name:memberid;datatype:int,name:service_name;datatype:string,name:church_attendance;datatype:string" />
+</info>

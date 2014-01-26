@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_settings" value="name:setting_id;datatype:int,name:company_name;datatype:string,name:company_vision;datatype:string,name:company_mission;datatype:string,name:company_strategy;datatype:string" />
+	<infoitem key="UD_period" value="name:period_id;datatype:int,name:start_date;datatype:date,name:end_date;datatype:date,name:period_name;datatype:string,name:individual_performance;datatype:int,name:company_performance;datatype:int,name:company_objectives;datatype:blob,name:department_objectives;datatype:blob,name:competencies;datatype:string" />
+</info>

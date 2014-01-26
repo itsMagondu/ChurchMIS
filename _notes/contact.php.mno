@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:contactid;datatype:int,name:memberid;datatype:int,name:phonenumber;datatype:string,name:emailaddress;datatype:string,name:alternative_contact;datatype:string,name:physical_address;datatype:string" />
+	<infoitem key="UD_addcontact" value="name:contactid;datatype:int,name:memberid;datatype:int,name:phonenumber;datatype:string,name:emailaddress;datatype:string,name:alternative_contact;datatype:string,name:physical_address;datatype:string" />
+	<infoitem key="UD_editcontact" value="name:contactid;datatype:int,name:memberid;datatype:int,name:phonenumber;datatype:string,name:emailaddress;datatype:string,name:alternative_contact;datatype:string,name:physical_address;datatype:string" />
+	<infoitem key="UD_viewcontact" value="name:contactid;datatype:int,name:memberid;datatype:int,name:phonenumber;datatype:string,name:emailaddress;datatype:string,name:alternative_contact;datatype:string,name:physical_address;datatype:string" />
+</info>

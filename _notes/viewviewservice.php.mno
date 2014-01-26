@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_DetailRS1" value="name:church_service _id;datatype:int,name:service_name;datatype:string,name:service_description;datatype:string,name:service_start_time;datatype:string,name:service_end_time;datatype:string" />
+	<infoitem key="UD_LiveData_params" value="1" />
+	<infoitem key="UD_LiveData_param0" value="recordID=1" />
+</info>

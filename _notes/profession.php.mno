@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addprofession" value="name:profession_id;datatype:int,name:memberid;datatype:int,name:profession_name;datatype:string,name:profession_start;datatype:string,name:profession_end;datatype:string,name:company_name;datatype:string" />
+	<infoitem key="UD_addmember" value="name:profession_id;datatype:int,name:memberid;datatype:int,name:profession_name;datatype:string,name:profession_start;datatype:string,name:profession_end;datatype:string,name:company_name;datatype:string" />
+	<infoitem key="UD_editprofession" value="name:profession_id;datatype:int,name:memberid;datatype:int,name:profession_name;datatype:string,name:profession_start;datatype:string,name:profession_end;datatype:string,name:company_name;datatype:string" />
+	<infoitem key="UD_viewprofession" value="name:profession_id;datatype:int,name:memberid;datatype:int,name:profession_name;datatype:string,name:profession_start;datatype:string,name:profession_end;datatype:string,name:company_name;datatype:string" />
+</info>

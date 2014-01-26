@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addmember" value="name:first_confirmationid;datatype:int,name:date;datatype:string,name:memberid;datatype:int,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:first_confirmationcert_no;datatype:int" />
+	<infoitem key="UD_addleader" value="name:first_confirmationid;datatype:int,name:date;datatype:string,name:memberid;datatype:int,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:first_confirmationcert_no;datatype:int" />
+	<infoitem key="UD_addfirstconfirmation" value="name:first_confirmationid;datatype:int,name:date;datatype:string,name:memberid;datatype:int,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:first_confirmationcert_no;datatype:int" />
+	<infoitem key="UD_editfirstconfirmation" value="name:first_confirmationid;datatype:int,name:date;datatype:string,name:memberid;datatype:int,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:first_confirmationcert_no;datatype:int" />
+	<infoitem key="UD_viewfirstconfirmation" value="name:first_confirmationid;datatype:int,name:date;datatype:string,name:memberid;datatype:int,name:leaderid;datatype:int,name:geust_leader;datatype:string,name:first_confirmationcert_no;datatype:int" />
+</info>

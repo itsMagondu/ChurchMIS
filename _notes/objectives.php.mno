@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_addobjective" value="name:objectives_id;datatype:int,name:objective_name;datatype:string,name:date_stipulated;datatype:string,name:date_achieved;datatype:string,name:department_id;datatype:int" />
+	<infoitem key="UD_editobjective" value="name:objectives_id;datatype:int,name:objective_name;datatype:string,name:date_stipulated;datatype:string,name:date_achieved;datatype:string,name:department_id;datatype:int" />
+	<infoitem key="UD_viewobjective" value="name:objectives_id;datatype:int,name:objective_name;datatype:string,name:date_stipulated;datatype:string,name:date_achieved;datatype:string,name:department_id;datatype:int" />
+	<infoitem key="UD_adddeparrtment" value="name:department_id;datatype:int,name:department_name;datatype:string,name:department_head;datatype:string,name:department_objective;datatype:string" />
+	<infoitem key="UD_editdepartment" value="name:department_id;datatype:int,name:department_name;datatype:string,name:department_head;datatype:string,name:department_objective;datatype:string" />
+	<infoitem key="UD_viewdepartment" value="name:department_id;datatype:int,name:department_name;datatype:string,name:department_head;datatype:string,name:department_objective;datatype:string" />
+</info>

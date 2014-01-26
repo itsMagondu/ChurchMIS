@@ -1,0 +1,92 @@
+@charset "utf-8";
+/* CSS Document */
+
+body, form {margin:0; padding:0; 
+   background: white;
+   background:none !important}
+html { overflow: -moz-scrollbars-vertical !important; min-height: 100%; }
+form {}
+
+.containshare { margin: 0 0 0 20px; float: none; width: 220px; }
+
+div { vertical-align: none; }
+/* Remove unwanted elements */
+
+.footer, 
+.newfooter,
+.footerclosed, 
+.conditionalcontent .newfooter,
+.timeline, 
+.decorationlines, 
+.explore,
+.containshare, 
+.mainmenu, 
+.feature, 
+.banner, 
+.navigation,
+.none,
+.wrapper,
+.topnavigation,
+.conditionalcontent .secondlevelmenu { display: none; }
+
+.container { width: 100%; }
+
+ul, ol { margin:0; padding:0; list-style: none; }
+h4 { margin:0; padding:0; font: bold 11px Arial, Helvetica, sans-serif; }
+
+.main { width: 100%; overflow: visible; margin-bottom: 29px; background:none}
+.maincontainer { width: 100%; }
+
+
+
+.content { width: 498px; min-height: 200px; margin-left: 20px; float: none; font: normal 13px/18px Arial, Helvetica, sans-serif; z-index: 100;}
+.content a { color: #519dc7; text-decoration: none; }
+.content a:hover { text-decoration: underline; }
+
+.transparent { width: 100%; }
+.white h1, .white p, .white h2, .white h3, .white h4, .white h5, .white h6, .white ul, .white ol, .pagination { margin: 0 20px; clear: both; }
+.white p { margin-bottom: 20px; font: normal 13px/18px Arial, Helvetica, sans-serif; color: #000; }
+.white h1 { font: bold 24px Helvetica, Arial, sans-serif; color: black; margin-bottom: 20px; }
+.white h2 { font: normal 24px Helvetica, Arial, sans-serif; /*color: #519dc7*/ color: #838384; margin-bottom: 20px; }
+.white h2 a { color: #519dc7 !important; text-decoration: none; }
+.white h5 { margin-bottom: 12px; font: bold 10px Arial, Helvetica, sans-serif; color: #838384; text-transform: uppercase; letter-spacing: 1px; }
+.white h5 a { text-decoration: none; color: #838384; }
+.white h5 a:hover { text-decoration: underline; color: #666; }
+.white .image { margin: 0 0 20px 20px; clear: none; float: none; }
+.feature .white .image { margin:0 0 20px 0; clear: both; float: none; }
+.feature .white { padding-top: 0; }
+.white .bigimage { margin: 0 0 20px }
+.more { text-decoration: none; text-transform: uppercase; display: block; width: 27px; font: bold 12px Arial, Helvetica, sans-serif; color: #519dc7; background: url(/BigHistory/images/more.gif) no-repeat right 2px; padding-right: 20px; margin: 20px 0; }
+
+.content ol { list-style: decimal; margin: 0 20px 0 50px;  }
+.content .white ul { list-style: none; }
+
+.content ul li p { margin:0; }
+
+.pagination { margin-bottom: 20px; overflow: auto; }
+.pagination ol { background: url(/BigHistory/images/chevron.gif) no-repeat right 7px; padding-right: 16px; list-style: none; width: auto; margin:0; }
+.pagination ol li { float: left; text-align: center; width: 26px; margin-right: 3px; }
+.pagination ol li a { display: block; width: 12px; height: 17px; border: 1px solid #999; text-decoration: none; font: bold 13px Arial, Helvetica, sans-serif; padding: 3px 6px; cursor: pointer;}
+.pagination ol li a:link { color: #519dc7; }
+.pagination ol li a:visited { color: #519dc7;}
+.pagination ol li a:hover { color: white; background: #999; }
+.pagination ol li a:active, .pagination .current a { color: white !important; background: #999; }
+
+.conditionalcontent .content { width: 458px; float: none; font: normal 13px/18px Arial, Helvetica, sans-serif; margin: 0 20px; }
+
+.units { margin: 2px 0 0; width: 498px; }
+.units .sectionhead td { background: white; padding: 4px 0; }
+.units .sectionhead td p { font: normal 24px Helvetica, Arial, sans-serif;  color: #999; margin: 0 0 0 20px;  }
+.units .blankrow td { background: none !important; border:none}
+.units .thead td { width: 248px; background: white; padding: 5px 10px 8px; text-align: left; font: bold 12px Arial, Helvetica, sans-serif; color: #000; vertical-align: bottom; }
+.units .thead td.nobg { width: 2px !important; background: transparent !important; padding:0 !important;}
+.units .tds td { width: 248px; padding: 10px 10px 12px; font: bold 12px Arial, Helvetica, sans-serif; color: #000; vertical-align: top; background: url('/BigHistory/images/75percentwhite.png') repeat; }
+.units .tds td h4 { color: #555; }
+.units td {border:1px solid #666}
+.units .tds td.nobg { width: 2px !important; background: none !important; padding:0 !important; border:none}
+
+#articleBottom { width: auto; background: white; padding: 10px 20px 15px; margin-top:-2px; overflow:auto; display:none}
+
+#divHeader { height:75px}
+.header {background:none}
+.header h2 { display: block !important;}

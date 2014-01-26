@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<info>
+	<infoitem key="UD_hobbies" value="name:hobby_id;datatype:int,name:memberid;datatype:int,name:hobby_name;datatype:string,name:intrests;datatype:string,name:special_skills;datatype:string,name:hobby_status;datatype:int" />
+</info>
