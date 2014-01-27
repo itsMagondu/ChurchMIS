@@ -43,12 +43,58 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
+?>
+<?php 
+
+mysql_select_db($database_church, $church);
+$query_viewmemberadded = "SELECT * FROM member_details 
+m LEFT JOIN marital_status ms ON m.statusid=ms.statusid LEFT JOIN 
+locality l ON m.localityid=l.localityid LEFT JOIN gender g ON m.genderid=g.genderid  LEFT JOIN church ch ON m.church_id=ch.church_id 
+LEFT JOIN departments ds ON m.department_id=ds.department_id WHERE m.status=1";
+$query_limit_viewmember = sprintf("%s LIMIT %d, %d", $query_viewmemberadded, $startRow_viewmemberadded, $maxRows_viewmemberadded);
+$viewmemberadded = mysql_query($query_viewmemberadded, $church) or die(mysql_error());
+$row_viewmemberadded = mysql_fetch_assoc($viewmemberadded);
+
+
+?>
 
 
 
 
 
-if ((isset($_POST["savemember"]))) {
+
+
+ <?php if ((isset($_POST["savemember"]))) { 
+	mysql_select_db($database_church, $church);
+$query_viewsavedmember= "SELECT * from member_details ms  WHERE  ms.member_no=".$_POST['member_no']."";
+$viewsavedmember = mysql_query($query_viewsavedmember, $church) or die('cannot view member details');
+$row_viewsavedmember = mysql_fetch_assoc($viewsavedmember);
+$totalRows_viewsavedmember = mysql_num_rows($viewsavedmember);
+if($totalRows_viewsavedmember>0){ ?>
+<script type="text/javascript">
+			alert('Pre-existing Record!!');
+			var goto='index.php?member=true &&  memberid=<?php echo $row_viewsavedmember['memberid']?>';
+			window.location.assign(goto);
+			</script>	
+
+ 
+
+
+		 
+<?php
+}else {?>
+
+	  <script type=text/javascript>
+var ans = confirm("save the Form");
+var f=document.forms(0);
+function savemember(){
+	
+
+					 if (ans)
+				 f.submit();				  
+				
+}</script>	 
+<?php  
 	
 	$tab="index.php?member=true#tabs-1";
 	$whereto=$tab;	
@@ -74,8 +120,11 @@ if ((isset($_POST["savemember"]))) {
   $Result1 = mysql_query($insertSQL, $church) or die(mysql_error());
   
    header("Location:$whereto");
-  
+ 
+
+ }
 }
+ 
 
 if ((isset($_POST["updatemember"]))) { 
 
@@ -84,7 +133,9 @@ if ((isset($_POST["updatemember"]))) {
    
      if ((isset($_GET['memberid'])) && ($_GET['memberid']!="")){
       
-  $updateSQL = sprintf("UPDATE member_details SET  member_no=%s,lastname =%s, middlename=%s, firstname=%s,languages_spoken=%s, dateofbirth=%s,  identificationnumber=%s,genderid=%s, localityid=%s, statusid=%s ,service_attended=%s,churh_attendance=%s,placeofbirth=%s WHERE memberid=".($_GET['memberid'])."", 
+  $updateSQL = sprintf("UPDATE member_details SET  member_no=%s,lastname =%s, middlename=%s, firstname=%s,languages_spoken=%s, dateofbirth=%s,  identificationnumber=%s,genderid=%s, localityid=%s,department_id=%s, statusid=%s,church_id=%s ,service_attended=%s,churh_attendance=%s,placeofbirth=%s WHERE memberid=".($_GET['memberid'])."", 
+  
+  
                        GetSQLValueString($_POST['member_no'], "text"),
 					   GetSQLValueString($_POST['lastname'], "text"),
                        GetSQLValueString($_POST['middlename'], "text"),
@@ -95,7 +146,9 @@ if ((isset($_POST["updatemember"]))) {
                        GetSQLValueString($_POST['genderid'], "int"),
   
                       GetSQLValueString($_POST['localityid'], "int"),
+					    GetSQLValueString($_POST['department_id'], "int"),
                        GetSQLValueString($_POST['statusid'], "int"),
+					    GetSQLValueString($_POST['church_id'], "int"),
 					    GetSQLValueString($_POST['service_attended'], "text"),
 						 GetSQLValueString($_POST['churh_attendance'], "text"),
 						  GetSQLValueString($_POST['placeofbirth'], "text"),
@@ -164,7 +217,7 @@ $totalRows_addchurch = mysql_num_rows($addchurch);
 
 if((isset($_GET['memberid'])) &&($_GET['memberid']!="")){
 mysql_select_db($database_church, $church);
-$query_editmember = "SELECT * FROM member_details m LEFT JOIN marital_status ms ON m.statusid=ms.statusid LEFT JOIN locality l ON m.localityid=l.localityid LEFT JOIN gender g ON m.genderid=g.genderid  WHERE m.memberid=".$_GET['memberid']."";
+$query_editmember = "SELECT * FROM member_details m LEFT JOIN marital_status ms ON m.statusid=ms.statusid LEFT JOIN locality l ON m.localityid=l.localityid LEFT JOIN gender g ON m.genderid=g.genderid LEFT JOIN departments ds ON m.department_id=ds.department_id LEFT JOIN church ch ON m.church_id=ch.church_id WHERE m.memberid=".$_GET['memberid']."";
 $editmember = mysql_query($query_editmember, $church) or die(mysql_error());
 $row_editmember = mysql_fetch_assoc($editmember);
 $totalRows_editmember = mysql_num_rows($editmember);
@@ -278,12 +331,13 @@ if ((isset($_POST["savecontact"]))) {
 
 if ((isset($_POST["updatecontact"]))) {
 	
+	$alldetailsid=$_GET['alldetailsid'];
 	
 	$tab="index.php?member=true#tabs-2";
 	$whereto=$tab;	
 	
 	
-     if ((isset($_GET['contactid'])) && ($_GET['contactid']!="")){
+     if ((isset($_GET['contactid'])) &&   ($_GET['contactid']!="")){
 	
   $updateSQL = sprintf("UPDATE member_contacts SET memberid=%s, phonenumber=%s, emailaddress=%s, alternative_contact=%s, physical_address=%s,postal_address=%s WHERE contactid=".($_GET['contactid'])."", 
                        GetSQLValueString($_POST['memberid'], "int"),
@@ -1029,7 +1083,7 @@ $totalRows_addgender  = mysql_num_rows($addgender );?>
       <td nowrap="nowrap" align="right">Member Number:</td>
       <td>
  <span id="sprytextfield3">
-  <input  name="member_no" type="number"  id="member_no" onchange="if(!Number(this.value)){alert('Please Enter Number for Member Number');}"  />
+  <input  name="member_no" type="number"  id="member_no" onChange="if(!Number(this.value)){alert('Please Enter Number for Member Number');}" value="<?php echo htmlentities($row_editmember['member_no'], ENT_COMPAT, 'utf-8'); ?>"  />
    <span class="textfieldRequiredMsg">.</span></span></td>
     </tr>
         
@@ -1157,28 +1211,28 @@ do {
     </tr>
     
 
-
-
-
-
  <tr valign="baseline">
       <td nowrap="nowrap" align="right">Church:</td>
       <td>
-         <span id="spryselect3">
-         
-        <select name="church_id" selected="selected">
+      
+<span id="spryselect3">
+ <select name="church_id" selected="selected">
            <option value="-1"  <?php if (!(strcmp(-1, $row_editmember['memberid']))) {echo "selected=\"selected\"";} ?>>Select Church</option>
           <?php 
 do {  
 ?>
-          <option value="<?php echo $row_addchurch['church_id']?>" <?php if (!(strcmp($row_addstatus['church_id'], $row_editmember['memberid']))) {echo "selected=\"selected\"";} ?> ><?php echo $row_addchurch['church_name']?></option>
+ <option value="<?php echo $row_addchurch['church_id']?>" <?php if (!(strcmp($row_addchurch['church_id'], $row_editmember['church_id']))) {echo "selected=\"selected\"";} ?> ><?php echo $row_addchurch['church_name']?></option> 
+          
+          
+          
   <?php
 } while ($row_addchurch = mysql_fetch_assoc($addchurch));
-  $rows = mysql_num_rows($addchurch);
+$rows = mysql_num_rows($addchurch);
   if($rows > 0) {
       mysql_data_seek($addchurch, 0);
 	  $row_addchurch = mysql_fetch_assoc($addchurch);
   }
+
 ?>
 
 
@@ -1233,18 +1287,16 @@ $totalRows_adddepartment = mysql_num_rows($adddepartment);
   
       <td nowrap="nowrap" align="right">Department:</td>
       <td><select name="department_id" selected="selected">  
-      <option value="-1" <?php if (!(strcmp(-1, $row_editcontact['memberid']))) {echo "selected=\"selected\"";} ?> >Select Department</option>
+      <option value="-1" <?php if (!(strcmp(-1, $row_editmember['memberid']))) {echo "selected=\"selected\"";} ?> >Select Department</option>
   <?php
 do {  
 ?>
-  <option  size="32"value="<?php echo $row_adddepartment['department_id']?>"><?php echo $row_adddepartment['department_name']?></option>
+<option value="<?php echo $row_adddepartment['department_id']?>"<?php if (!(strcmp($row_adddepartment['department_id'], $row_editmember['department_id']))) {echo "selected=\"selected\"";} ?> ><?php echo $row_adddepartment['department_name']?></option>
+  
+  
         <?php
 } while ($row_adddepartment = mysql_fetch_assoc($adddepartment));
-  $rows = mysql_num_rows($adddepartment);
-  if($rows > 0) {
-      mysql_data_seek($adddepartment, 0);
-	  $row_adddepartment = mysql_fetch_assoc($adddepartment);
-  }
+
 ?>         
 </select>
         </td>
@@ -1257,7 +1309,7 @@ do {
       <td><?php if((isset($_GET['memberid'])) &&($_GET['memberid']!="")) {?>
           <input type="submit" value="Update" name="updatemember">
 	    <input type="submit" name="delete" id="delete" value="Deceased" />
-		<?php } else  {?><input type="submit" value="Save" name="savemember"><?php }?>
+		<?php } else  {?><input type="submit" value="Save" id="savemember" name="savemember" onClick="savemember();"><?php }?>
       </td>
     </tr>
   </table>
@@ -1392,7 +1444,7 @@ $("#histo").toggle("slow");
   ?>
          <td><a href="index.php?member=show&contactid=<?php echo $row_viewcontact['contactid']; ?>& #tabs-2"> Edit </a></td> 
            
-<td><a href="index.php?member=<?php echo $row_viewcontact['contactid'];?> & archive=1 & #tabs-2 " onclick="return ConfirmArchive()">Archive  </a></td>
+<td><a href="index.php?member=<?php echo $row_viewcontact['contactid'];?> & archive=1 & #tabs-2 " onClick="return ConfirmArchive()">Archive  </a></td>
  
          <?php }?>    
         
@@ -1506,7 +1558,7 @@ do {
       <td><?php echo $row_viewprofession['lastname']; ?>&nbsp;<?php echo $row_viewprofession['firstname']; ?>&nbsp;<?php echo $row_viewprofession['middlename']; ?> </td>
       <td><?php echo $row_viewprofession['profession_name']; ?>&nbsp; </td>
       
-             <td><a href="index.php?member=show&profession_id=<?php echo $row_viewprofession['profession_id']; ?>& #tabs-4"> Edit </a></td>                 <td><a href="index.php?member=<?php echo $row_viewprofession['profession_id'];?> & archive=1 & #tabs-4  " onclick="return ConfirmArchive()">Archive  </a></td>
+             <td><a href="index.php?member=show&profession_id=<?php echo $row_viewprofession['profession_id']; ?>& #tabs-4"> Edit </a></td>                 <td><a href="index.php?member=<?php echo $row_viewprofession['profession_id'];?> & archive=1 & #tabs-4  " onClick="return ConfirmArchive()">Archive  </a></td>
  </tr>
     <?php } while ($row_viewprofession = mysql_fetch_assoc($viewprofession)); ?>
 </table>
@@ -1620,7 +1672,7 @@ $("#hob").toggle("slow");
   ?> 
         
         <td><a href="index.php?member=show&hobby_id=<?php echo $row_viewhobby['hobby_id']; ?>& #tabs-5"> Edit </a></td> 
-        <td><a href="index.php?member=<?php echo $row_viewhobby['hobby_id'];?> & archive=1 & #tabs-5  " onclick="return ConfirmArchive()" >Archive  </a></td>
+        <td><a href="index.php?member=<?php echo $row_viewhobby['hobby_id'];?> & archive=1 & #tabs-5  " onClick="return ConfirmArchive()" >Archive  </a></td>
 
  <?php }?>
       </tr>

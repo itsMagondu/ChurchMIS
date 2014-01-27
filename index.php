@@ -27,13 +27,17 @@ require_once('functions.php');
 <link type="text/css" href="/st_peters/bootstrap-responsive.min.css" rel="stylesheet"/>
 
 <script type="text/javascript" src="utilities.js"></script>
+
 </head>
 <div class="mainbody">
-<body><table width="100%" border="0" cellspacing="1" cellpadding="1">
+<body>
+<table width="100%" border="0" cellspacing="1" cellpadding="1">
+
   <tr valign="top">
   <tr>
     <td><?php include("header.php"); ?></td>
   </tr>
+ 
   <tr>
     <td><div class="bodytext">
     <?php 
@@ -107,7 +111,7 @@ require_once('functions.php');
 		include("logout.php");}
 		else if(isset($_GET['login'])){
 		include("login.php");}
-		else if(isset($_GET['loginadmin'])){
+		else {
 		include("loginadmin.php");}
 		
 		
