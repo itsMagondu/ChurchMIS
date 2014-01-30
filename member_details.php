@@ -65,6 +65,24 @@ $row_viewmemberadded = mysql_fetch_assoc($viewmemberadded);
 
 
  <?php if ((isset($_POST["savemember"]))) { 
+ 
+ 
+ 
+
+
+ 
+
+ 
+ $dateofbirth=$_POST['dateofbirth'];/*  $date= date("d/m/Y",$end) ;  */
+		$arrFrom=explode('/',$dateofbirth);
+	    $birthdyday=$arrFrom[0];
+  	    $birthdaymonth=$arrFrom[1];
+	    $birthdayyear=$arrFrom[2];	   
+	    //$startdate=$birthdayyear.'-'.$birthdaymonth.'-'.$birthdyday;
+ 
+ 
+ 
+ 
 	mysql_select_db($database_church, $church);
 $query_viewsavedmember= "SELECT * from member_details ms  WHERE  ms.member_no=".$_POST['member_no']."";
 $viewsavedmember = mysql_query($query_viewsavedmember, $church) or die('cannot view member details');
@@ -98,14 +116,17 @@ function savemember(){
 	
 	$tab="index.php?member=true#tabs-1";
 	$whereto=$tab;	
-  $insertSQL = sprintf("INSERT INTO member_details (member_no,lastname, middlename, firstname,languages_spoken, dateofbirth, identificationnumber,genderid , localityid,department_id, statusid,church_id,service_attended,churh_attendance,placeofbirth) VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s)",
+  $insertSQL = sprintf("INSERT INTO member_details (member_no,lastname, middlename, firstname,languages_spoken, dateofbirth,birthdayyear,birthdaymonth,birthdate, identificationnumber,genderid,localityid,department_id, statusid,church_id,service_attended,churh_attendance,placeofbirth) VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                        
 					   GetSQLValueString($_POST['member_no'], "text"),
                        GetSQLValueString($_POST['lastname'], "text"),
                        GetSQLValueString($_POST['middlename'], "text"),
                        GetSQLValueString($_POST['firstname'], "text"),
 					    GetSQLValueString($_POST['languages_spoken'], "text"),
-                       GetSQLValueString($_POST['dateofbirth'], "text"),
+                       GetSQLValueString($dateofbirth, "text"),
+					  GetSQLValueString($birthdayyear, "text"),
+					GetSQLValueString($birthdaymonth, "text"),
+					GetSQLValueString($birthdyday, "text"),
 					   GetSQLValueString($_POST['identificationnumber'], "int"),
                        GetSQLValueString($_POST['genderid'], "int"),
                        GetSQLValueString($_POST['localityid'], "int"),
@@ -117,7 +138,7 @@ function savemember(){
 					    GetSQLValueString($_POST['placeofbirth'], "text"));
 
   mysql_select_db($database_church, $church);
-  $Result1 = mysql_query($insertSQL, $church) or die(mysql_error());
+  $Result1 = mysql_query($insertSQL, $church) or  die(mysql_error());
   
    header("Location:$whereto");
  
@@ -337,7 +358,12 @@ if ((isset($_POST["updatecontact"]))) {
 	$whereto=$tab;	
 	
 	
+
      if ((isset($_GET['contactid'])) &&   ($_GET['contactid']!="")){
+		 
+		 $evalid= $_GET['contactid'] ;
+	$who=$_GET['memberid'] ;
+	
 	
   $updateSQL = sprintf("UPDATE member_contacts SET memberid=%s, phonenumber=%s, emailaddress=%s, alternative_contact=%s, physical_address=%s,postal_address=%s WHERE contactid=".($_GET['contactid'])."", 
                        GetSQLValueString($_POST['memberid'], "int"),
@@ -350,12 +376,20 @@ if ((isset($_POST["updatecontact"]))) {
 
   mysql_select_db($database_church, $church);
   $Result1 = mysql_query($updateSQL, $church) or die(mysql_error());
+  
+  if(isset($_GET['contactid']) && $_GET['contactid']!='' && isset($_GET['memberid'])){
+	
+									  header("Location:index.php?alldetails=$evalid && who=$who");}
 }
+  
+  
+
 
  header("Location:$whereto");
 
 }
 
+		echo  $evalid;
 
 mysql_select_db($database_church, $church);
 $query_addmember = "SELECT * FROM member_contacts";
@@ -854,6 +888,28 @@ $query_viewsearchcontact = "SELECT * FROM member_details ";
 $viewsearchcontact = mysql_query($query_viewsearchcontact, $church) or die(mysql_error());
 $row_viewsearchcontact=  mysql_fetch_assoc($viewsearchcontact);
 $totalRows_viewsearchcontact = mysql_num_rows($viewsearchcontact);
+
+
+ 
+		
+		
+//$check_crm = mysql_query("select * from member_details ms  where ms.dateofbirth =".$day." AND ".$month."");
+
+$date =date('Y-m-d');
+
+$month =date("m",strtotime($date))."";
+$day=date("d",strtotime($date))."";
+
+
+
+mysql_select_db($database_church, $church);
+$query_birthdays = "SELECT * FROM member_details ms where ms.birthdaymonth=".$month." AND ms.birthdate=".$day."";
+$birthdays = mysql_query($query_birthdays, $church) or die(mysql_error());
+$row_birthdays=  mysql_fetch_assoc($birthdays);
+$totalRows_birthdays = mysql_num_rows($birthdays);
+
+
+
 ?>
 
 
@@ -945,10 +1001,10 @@ function ConfirmArchive()
 			changeYear: true
 			
 		});
-		$('#dateofbirth').datepicker({
+			$('#dateofbirth').datepicker({
 		  
 			changeMonth: true,
-			dateFormat: "yy-mm-dd",
+			dateFormat: "dd/mm/yy",
 			changeYear: true
 		});
 		$('#fire').datepicker({
@@ -984,42 +1040,7 @@ function ConfirmArchive()
 			dateFormat: "yy-mm-dd",
 			changeYear: true
 		});
-		$('#trainto').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#promodate').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#awarddate').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#dateofbirthadmn').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#acad_to').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#emp_from').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		$('#emp_to').datepicker({
-			changeMonth: true,
-			dateFormat: "yy-mm-dd",
-			changeYear: true
-		});
-		
+				
 
 	});
 	</script>
@@ -1028,16 +1049,41 @@ function ConfirmArchive()
 		$("#tabs").tabs().find(".ui-tabs-nav").sortable({axis:'x'});
 	});
 	</script>
-
+    
+    
+   
 <script type="text/javascript" src="/st_peters/search.js"></script>
     
 <link href="/st_peters/SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css" />
 <link href="/st_peters/SpryAssets/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="/st_peters/js/tablecloth.js"></script>
+
+<?php if($totalRows_birthdays>0) {?>
+<script language="javascript">
+<!-- begin
+
+$.titleAlert("FILES OUT FOR MORE THAN 10 DAYS!",{
+	 requireBlur:false,
+    stopOnFocus:false,
+    duration:4000,
+    interval:700
+	});
+
+function popup(){
+window.open('birthday_results_pop.php','PopupName','toolbar=0,location=0,status=0,menubar=0,scrollbars=0,resizable=0,width=800,height=200');
+
+}
+// end -->
+</script>
+<?php }?>
+
+
+
+
 </head>
 
 </head><div class="bodytext">
-<body>
+<body onload="popup()"> 
 
 <div id="tabs" class="datataable">
 <ul>
