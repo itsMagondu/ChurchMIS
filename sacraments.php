@@ -119,12 +119,12 @@ if ((isset($_GET['baptismid'])) && ($_GET['baptismid']!="")){
 
 if ((isset($_GET['archive']) &&(isset($_GET['sacraments'])) && ($_GET['sacraments'] != ""))) {
 
-  $uPdateSQL1= sprintf("UPDATE  baptism  SET baptism_status=2 
+  $uPdateSQL4= sprintf("UPDATE  baptism  SET baptism_status=2 
   WHERE baptismid=".$_GET['sacraments']."",
    GetSQLValueString($_GET['sacraments'], "int"));
 
    mysql_select_db($database_church, $church);
-  $Result1= mysql_query($uPdateSQL1, $church) or die('cannot archive baptism');
+  $Result4= mysql_query($uPdateSQL4, $church) or die('cannot archive baptism');
 }
 
 
@@ -194,15 +194,14 @@ $queryString_viewbaptism = sprintf("&totalRows_viewbaptism=%d%s", $totalRows_vie
 
 
 
-
 if ((isset($_GET['archive']) &&(isset($_GET['sacraments'])) && ($_GET['sacraments'] != ""))) {
 
-  $uPdateSQL2= sprintf("UPDATE  first_confirmation  SET first_confirmation_status=2 
+  $uPdateSQL9= sprintf("UPDATE  first_confirmation  SET status=2 
   WHERE first_confirmationid=".$_GET['sacraments']."",
    GetSQLValueString($_GET['sacraments'], "int"));
 
    mysql_select_db($database_church, $church);
-  $Result2= mysql_query($uPdateSQL2, $church) or die('cannot archive baptism');
+  $Result9= mysql_query($uPdateSQL9, $church) or die('cannot archive pre confirmation');
 }
 
 
@@ -307,7 +306,7 @@ $totalRows_editfirstconfirmation = mysql_num_rows($editfirstconfirmation);
 
 
 
-$maxRows_viewfirstconfirmation = 10;
+$maxRows_viewfirstconfirmation = 5;
 $pageNum_viewfirstconfirmation = 0;
 if (isset($_GET['pageNum_viewfirstconfirmation'])) {
   $pageNum_viewfirstconfirmation = $_GET['pageNum_viewfirstconfirmation'];
@@ -316,7 +315,7 @@ $startRow_viewfirstconfirmation = $pageNum_viewfirstconfirmation * $maxRows_view
 
 
 mysql_select_db($database_church, $church);
-$query_viewfirstconfirmation = "SELECT * FROM first_confirmation f INNER JOIN member_details m ON f.memberid=m.memberid WHERE f.first_confirmation_status='1' ";
+$query_viewfirstconfirmation = "SELECT * FROM first_confirmation f INNER JOIN member_details m ON f.memberid=m.memberid WHERE f.status='1' ";
 $query_limit_viewfirstconfirmation = sprintf("%s LIMIT %d, %d", $query_viewfirstconfirmation, $startRow_viewfirstconfirmation, $maxRows_viewfirstconfirmation);
 $viewfirstconfirmation = mysql_query($query_limit_viewfirstconfirmation, $church) or die(mysql_error());
 $row_viewfirstconfirmation = mysql_fetch_assoc($viewfirstconfirmation);
@@ -384,7 +383,7 @@ if ((isset($_POST["secondconfirmation"]))) {
 		$tab="index.php?sacraments=true#tabs-3";
 	$whereto=$tab;
 	
-  $insertSQL = sprintf("INSERT INTO second_confirmation (memberid,male_god_parent,female_god_parent, secondconfirmation_date, leader, geust_leader, second_confirmationcert_no) VALUES (%s, %s, %s, %s, %s,%s,%s)",
+  $insertSQL = sprintf("INSERT INTO second_confirmation (memberid,male_god_parent,female_god_parent, secondconfirmation_date, leader, geust_leader,confirmation_venue, second_confirmationcert_no) VALUES (%s, %s, %s, %s, %s,%s,%s,%s)",
                      
                        GetSQLValueString($_POST['memberid'], "int"),
 					   GetSQLValueString($_POST['male_god_parent'], "text"),
@@ -392,10 +391,11 @@ if ((isset($_POST["secondconfirmation"]))) {
                        GetSQLValueString($_POST['secondconfirmation_date'], "text"),
                        GetSQLValueString($_POST['leader'], "text"),
                        GetSQLValueString($_POST['geust_leader'], "text"),
+					   GetSQLValueString($_POST['confirmation_venue'], "text"),
                        GetSQLValueString($_POST['second_confirmationcert_no'], "int"));
 
   mysql_select_db($database_church, $church);
-  $Result1 = mysql_query($insertSQL, $church) or die(mysql_error());
+  $Result1 = mysql_query($insertSQL, $church) or die("Cannot Update Details");
   
      header("Location:$whereto");
 	 
@@ -410,13 +410,14 @@ if ((isset($_POST["updatesecondconfirmation"]))) {
 	
 	
 	if((isset($_GET['second_confirmationid']) && ($_GET['second_confirmationid']!==""))){
-  $updateSQL = sprintf("UPDATE second_confirmation SET memberid=%s,male_god_parent=%s,female_god_parent=%s, secondconfirmation_date=%s, leader=%s, geust_leader=%s, second_confirmationcert_no=%s WHERE second_confirmationid=".$_GET['second_confirmationid']."",
+  $updateSQL = sprintf("UPDATE second_confirmation SET memberid=%s,male_god_parent=%s,female_god_parent=%s, secondconfirmation_date=%s, leader=%s, geust_leader=%s,confirmation_venue=%s, second_confirmationcert_no=%s WHERE second_confirmationid=".$_GET['second_confirmationid']."",
                        GetSQLValueString($_POST['memberid'], "int"),
 					   GetSQLValueString($_POST['male_god_parent'], "text"),
 				        GetSQLValueString($_POST['female_god_parent'], "text"),
                        GetSQLValueString($_POST['secondconfirmation_date'], "text"),
                        GetSQLValueString($_POST['leader'], "text"),
                        GetSQLValueString($_POST['geust_leader'], "text"),
+					    GetSQLValueString($_POST['confirmation_venue'], "text"),
                        GetSQLValueString($_POST['second_confirmationcert_no'], "int"),
                        GetSQLValueString($_POST['second_confirmationid'], "int"));
 
@@ -535,13 +536,27 @@ if ((isset($_POST["updatemarriage"]))) {
 	
 	if((isset($_GET['marriageid']) && ($_GET['marriageid']!=""))){
 		
-$updateSQL = sprintf("UPDATE marriage SET husbandname=%s, wifenameid=%s,best_man=%s,best_maid=%s, marriage_date=%s, leaderid=%s,solemnization_venue=%s, marriagecert_no=%s WHERE marriageid=".$_GET['marriageid']."",
+		
+		
+			
+	 $marriagedate=$_POST['marriage_date'];/*  $date= date("d/m/Y",$end) ;  */
+		$arrFrom=explode('/',$marriagedate);
+	    $marriageday=$arrFrom[0];
+  	    $marriagemonth=$arrFrom[1];
+	    $marriageyear=$arrFrom[2];	   
+	    //$startdate=$birthdayyear.'-'.$birthdaymonth.'-'.$birthdyday;
+		
+		
+$updateSQL = sprintf("UPDATE marriage SET husbandname=%s,husband=%s, wifenameid=%s,wife=%s,marriage_date=%s,marriageyear=%s,marriagemonth=%s,marriageday=%s, leader_name=%s,solemnization_venue=%s, marriagecert_no=%s WHERE marriageid=".$_GET['marriageid']."",
                        GetSQLValueString($_POST['husbandname'], "int"),
+					    GetSQLValueString($_POST['husband'], "text"),
                        GetSQLValueString($_POST['wifenameid'], "int"),
-					   GetSQLValueString($_POST['best_man'], "text"),
-					GetSQLValueString($_POST['best_maid'], "text"),
-                       GetSQLValueString($_POST['marriage_date'], "text"),
-                       GetSQLValueString($_POST['leaderid'], "int"),
+					    GetSQLValueString($_POST['wife'], "text"),
+				      GetSQLValueString($marriagedate, "text"),
+					     GetSQLValueString($marriageyear, "text"), 
+					   GetSQLValueString($marriagemonth, "text"), 
+					   GetSQLValueString($marriageday, "text"), 
+                       GetSQLValueString($_POST['leader_name'], "text"),
 					    GetSQLValueString($_POST['solemnization_venue'], "text"),
                        GetSQLValueString($_POST['marriagecert_no'], "int"),
                        GetSQLValueString($_POST['marriageid'], "int"));
@@ -561,16 +576,28 @@ $updateSQL = sprintf("UPDATE marriage SET husbandname=%s, wifenameid=%s,best_man
 
 if ((isset($_POST["savemarriage"]))) {
 	
+	
+	 $marriagedate=$_POST['marriage_date'];/*  $date= date("d/m/Y",$end) ;  */
+		$arrFrom=explode('/',$marriagedate);
+	    $marriageday=$arrFrom[0];
+  	    $marriagemonth=$arrFrom[1];
+	    $marriageyear=$arrFrom[2];	   
+	    //$startdate=$birthdayyear.'-'.$birthdaymonth.'-'.$birthdyday;
+	
+	
 	$tab="index.php?sacraments=true#tabs-4";
 	$whereto=$tab;	
 	
-  $insertSQL = sprintf("INSERT INTO marriage (husbandname,husband, wifenameid,wife, marriage_date,marriage_type, leader_name,solemnization_venue, marriagecert_no) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s)",
+  $insertSQL = sprintf("INSERT INTO marriage (husbandname,husband, wifenameid,wife, marriage_date,marriageyear,marriagemonth,marriageday,marriage_type, leader_name,solemnization_venue, marriagecert_no) VALUES (%s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s)",
                       
                        GetSQLValueString($_POST['husbandname'], "int"),
 					    GetSQLValueString($_POST['husband'], "text"),
                        GetSQLValueString($_POST['wifenameid'], "int"),
 		               GetSQLValueString($_POST['wife'], "text"),
-					   GetSQLValueString($_POST['marriage_date'], "text"), 
+					   GetSQLValueString($marriagedate, "text"), 
+					   GetSQLValueString($marriageyear, "text"), 
+					   GetSQLValueString($marriagemonth, "text"), 
+					   GetSQLValueString($marriageday, "text"), 
 					    GetSQLValueString($_POST['marriage_type'], "text"),
                        GetSQLValueString($_POST['leader_name'], "text"),
 					   GetSQLValueString($_POST['solemnization_venue'], "text"),
@@ -782,15 +809,12 @@ $queryString_viewdeceased = sprintf("&totalRows_viewdeceased=%d%s", $totalRows_v
 	<script type="text/javascript" src="/st_peters/js/jquery-ui/ui/jquery.ui.datepicker.js"></script>
 <script type="text/javascript" src="/st_peters/js/jquery-ui/ui/jquery.ui.tabs.js"></script>
 <script type="text/javascript" src="/st_peters/js/jquery-ui/ui/jquery.effects.blind.js"></script>
-<script src="/st_peters/SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
 <script src="/st_peters/SpryAssets/SpryValidationTextField.js" type="text/javascript"></script>
+<script src="/st_peters/SpryAssets/SpryValidationSelect.js" type="text/javascript"></script>
 <link type="text/css" href="/st_peters/js/jquery-ui/demos/demos.css" rel="stylesheet" />
-<link type="text/css" href="/st_peters/assets/css/tablecloth.css" rel="stylesheet"/>
-<link type="text/css" href="/st_peters/assets/css/bootstrap-tables.css" rel="stylesheet"/>
-<link type="text/css" href="/st_peters/assets/css/bootstrap.css" rel="stylesheet"/>
-<link type="text/javascript" href="/st_peters/assets/js/bootstrap.js" />
-<link type="text/javascript" href="tms.css"/>
 
+
+<link href="tms.css" type="text/css" rel="stylesheet"/>
 
 <script type="text/javascript">
 function ConfirmArchive()
@@ -829,7 +853,7 @@ function ConfirmArchive()
 		});
 		$('#marriage_date').datepicker({
 			changeMonth: true,
-			dateFormat: "yy-mm-dd",
+			dateFormat: "dd/mm/yy",
 			changeYear: true
 		});
 		$('#datedeceased').datepicker({
@@ -900,9 +924,9 @@ function ConfirmArchive()
 <link href="/st_peters/SpryAssets/SpryValidationSelect.css" rel="stylesheet" type="text/css" />
 </head>
 
-</head>
+</head><div class="bodytext">
 <body>
-<div class="bodytext">
+
 <div id="tabs">
 <ul>
 		<li><a href="#tabs-1">Baptism</a></li>
@@ -956,9 +980,9 @@ do {
     </tr>
      <tr valign="baseline">
       <td nowrap="nowrap" align="right">Baptism Venue:</td>
-      <td><span id="sprytextfield1">
+      <td>
         <input type="text" name="baptism_venue" value="<?php echo htmlentities($row_editbaptism['baptism_venue'], ENT_COMPAT, 'utf-8'); ?>" size="32" />
-        <span class="textfieldRequiredMsg">A value is required.</span></span></td>
+        </td>
     </tr>
     <tr valign="baseline">
       <td nowrap="nowrap" align="right">Baptism cert No:</td>
@@ -977,7 +1001,7 @@ do {
       <tr class="tableheader">
       <td width="2%">No</td>
       <td width="15%">Member Names</td>
-     
+      <td width="8%">Date</td>
       <td width="15%">Officiating  Clergy</td>
       <td>Male god parent</td>
       <td>Female god parent</td>
@@ -1000,7 +1024,7 @@ $totalRows_viewleaderbaptism = mysql_num_rows($viewleaderbaptism);
       <tr>
         <td><?php  echo $numb;?></td>
         <td><?php echo $row_viewbaptism['firstname']; ?>&nbsp;<?php echo $row_viewbaptism['middlename']; ?>&nbsp;<?php echo $row_viewbaptism['lastname']; ?> </td>
-        
+        <td><?php echo $row_viewbaptism['date_baptised']; ?>&nbsp; </td>
         <td><?php echo $row_viewbaptism['officiating_clergy']; ?>&nbsp; </td>
         <td><?php echo $row_viewbaptism['male_god_parent']; ?>&nbsp; </td>
           <td><?php echo $row_viewbaptism['female_god_parent']; ?>&nbsp; </td>
@@ -1108,7 +1132,7 @@ do {
     <tr>
       <td width="2%">No</td>
       <td width="15%">Member Names</td>
-      
+      <td width="8%">Date</td>
       <td width="15%">Offiiating  Clergy</td>
       <td>Male god parent</td>
       <td>Female god parent</td>
@@ -1128,7 +1152,7 @@ $totalRows_leaderfirstconfirmation = mysql_num_rows($leaderfirstconfirmation);
       <tr>
         <td><?php echo  $rawnum; ?></td>
             <td><?php echo $row_viewfirstconfirmation['firstname']; ?>&nbsp; <?php echo $row_viewfirstconfirmation['middlename']; ?>&nbsp;<?php echo $row_viewfirstconfirmation['lastname']; ?></td>
-       
+        <td><?php echo $row_viewfirstconfirmation['firstconfirmation_date']; ?>&nbsp; </td>
          <td><?php echo $row_viewfirstconfirmation['officiating_clergy']; ?>&nbsp; </td>
         <td><?php echo $row_viewfirstconfirmation['male_god_parent']; ?>&nbsp; </td>
           <td><?php echo $row_viewfirstconfirmation['female_god_parent']; ?>&nbsp; </td>
@@ -1241,7 +1265,7 @@ do {
     <tr>
       <td width="2%">No</td>
       <td width="15%">Member Names</td>
-     
+      <td width="8%">Date</td>
       <td width="15%">Officiating Bishop</td>
       <td>Male god parent</td>
       <td>Female god parent</td>
@@ -1255,7 +1279,7 @@ do {
 <tr>
         <td><?php  echo $numcon; ?></td>
         <td><?php echo $row_viewsecondconfirmation['firstname']; ?>&nbsp;<?php echo $row_viewsecondconfirmation['middlename']; ?>&nbsp;<?php echo $row_viewsecondconfirmation['lastname']; ?> </td>
-        
+        <td><?php echo $row_viewsecondconfirmation['secondconfirmation_date']; ?>&nbsp; </td>
         <td><?php echo $row_viewsecondconfirmation['leader']; ?>&nbsp; </td>
         <td><?php echo $row_viewsecondconfirmation['male_god_parent']; ?>&nbsp; </td>
           <td><?php echo $row_viewsecondconfirmation['female_god_parent']; ?>&nbsp; </td>
@@ -1306,7 +1330,7 @@ $totalRows_addmemberhusband= mysql_num_rows($addmemberhusband);
         <tr valign="baseline">
       <td nowrap="nowrap" align="right">Husband Name:</td>
       <td>
-      <input name="memberid" value="<?php echo $row_editmarriage['memberid']; ?>" type="hidden">
+      <input name="husbandname" value="<?php echo $row_editmarriage['husbandname']; ?>" type="hidden">
       <?php if ((isset($_GET['marriageid'])) && ($_GET['marriageid'] != "")){ echo $row_editmarriagehusband['firstname'] ;?>&nbsp;<?php echo $row_editmarriagehusband['middlename'] ;?> &nbsp;<?php echo $row_editmarriagehusband['lastname'] ; } else {?>
       
       
@@ -1337,13 +1361,13 @@ do {
       <td>
       <?php  mysql_select_db($database_church, $church);
 $query_addwife = "SELECT *  FROM  member_details m
- INNER JOIN gender g ON g.genderid=m.genderid INNER JOIN marital_status  s ON m.statusid=s.statusid WHERE g.genderid='2' " ;
+ INNER JOIN gender g ON g.genderid=m.genderid   WHERE g.genderid='2' " ;
 $addwife = mysql_query($query_addwife, $church) or die(mysql_error());
 $row_addwife = mysql_fetch_assoc($addwife);
 $totalRows_addwife= mysql_num_rows($addwife);
 ?>
 
-     <input name="memberid" value="<?php echo $row_editmarriage['marriageid']; ?>" type="hidden">
+     <input name="wifenameid" value="<?php echo $row_editmarriage['wifenameid']; ?>" type="hidden">
       <?php if ((isset($_GET['marriageid'])) && ($_GET['marriageid'] != "")){ echo $row_editmarriage['lastname'] ;?>&nbsp;<?php echo $row_editmarriage['middlename'] ;?> &nbsp;<?php echo $row_editmarriage['firstname'] ; } else {?>
  <select name="wifenameid">
             <option value="-1">Select Wife</option>
@@ -1414,7 +1438,7 @@ do {
        <td width="8%">Husband </td>
        <td width="8%">Wife </td>
       <td width="8%">Marriage Type </td>
-     
+      <td width="5%">date</td>
         <td width="8%">leader Name</td>
         <td width="8%">Certificate Number</td>
         <td width="2%">&nbsp;</td>
@@ -1454,7 +1478,7 @@ $totalRows_marriagewife = mysql_num_rows($marriagewife);
         <td><?php echo $row_viewmarriage['husband']; ?></td>
         <td><?php echo $row_viewmarriage['wife']; ?></td> 
         <td><?php echo $row_viewmarriage['marriage_type']; ?></td> 
-       
+        <td><?php echo $row_viewmarriage['marriage_date']; ?>&nbsp; </td>
         <td><?php echo $row_leadersmarriage['firstname']; ?>&nbsp;<?php echo $row_leadersmarriage['middlename']; ?>&nbsp;<?php echo $row_leadersmarriage['lastname']; ?></td>
         <td><?php echo $row_viewmarriage['marriagecert_no']; ?></td>
         
@@ -1666,8 +1690,8 @@ Records <?php echo ($startRow_viewdeceased + 1) ?> to <?php echo min($startRow_v
 
 </div>
 <script type="text/javascript">
-var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1");
-var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1");
+
+/*var spryselect1 = new Spry.Widget.ValidationSelect("spryselect1");*/
 var spryselect2 = new Spry.Widget.ValidationSelect("spryselect2");
 </script>
 </body>
