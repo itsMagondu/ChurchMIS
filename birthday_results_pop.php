@@ -38,25 +38,17 @@ require_once('Connections/church.php');
 require_once('functions.php');
 
 $currentPage = $_SERVER["PHP_SELF"];
-
-
-
-
-
 $maxRows_allbirthdays = 100;
 $pageNum_allbirthdays = 0;
-if (isset($_GET['pageNum_allbirthdays'])) {
+
+  if (isset($_GET['pageNum_allbirthdays'])) {
   $pageNum_allbirthdays = $_GET['pageNum_allbirthdays'];
-}
+  }
 $startRow_allbirthdays = $pageNum_allbirthdays * $maxRows_allbirthdays;
 
-
 $date =date('Y-m-d');
-
 $month =date("m",strtotime($date))."";
 $day=date("d",strtotime($date))."";
-
-
 
 
 
@@ -116,7 +108,9 @@ $queryString_allbirthdays = sprintf("&totalRows_allbirthdays=%d%s", $totalRows_a
 <link type="text/css" href="/st_peters/js/jquery-ui/demos/demos.css" rel="stylesheet" />
 <link type="text/css" href="/st_peters/assets/css/tablecloth.css" rel="stylesheet"/>
 <link type="text/css" href="/st_peters/assets/css/bootstrap-tables.css" rel="stylesheet"/>
-<link type="text/css" href="/st_peters/assets/css/bootstrap.css" rel="stylesheet"/>
+
+<link type="text/css" href="bootstrap.min.css" rel="stylesheet"/>
+<link type="text/css" href="dataTables.bootstrap.css" rel="stylesheet"/>
 <link type="text/javascript" href="/st_peters/assets/js/bootstrap.js" />
 <link type="text/javascript" href="tms.css"/>
 <script src="jquery.js" type="text/javascript"></script>
@@ -145,69 +139,52 @@ $queryString_allbirthdays = sprintf("&totalRows_allbirthdays=%d%s", $totalRows_a
 </head>
 
 <body> 
+     <div class="table-responsive">
+ 
+  <div class="panel-body">
+  
+ 
 <div class="popup">
   <div id="output_div2">
   <?php if($totalRows_allbirthdays>0){ ?>
  
-      <table border="1" align="center" class="bodytextmembers" >
+       <table class="table table-bordered">
   <thead>
       <tr>
         <td colspan="10" align="center" class="tableheader">MEMBERS WITH BIRTHDAYS TODAY</td>
       </tr>
       <tr class="header2">
-        <td>No.</td>
-        <td>Member Name</td>
-        <td>Phone Number</td>
-        <td>Email Address</td>
-        <td>Alternative Contact</td> 
-        <td>Physical Address</td>
-       
-        
-      </tr>
-      <?php $rownum = $startRow_allbirthdays; do {
-
-	  
-	  $rownum++;  ?>
+                <td>No.</td>
+                <td>Member Name</td>
+                <td>Phone Number</td>
+                <td>Email Address</td>
+                <td>Alternative Contact</td> 
       
-     <tr  <?php if ($rownum%2==0) { echo 'class="othereven"'; }else{echo 'class="otherodd"';}?> > 
-        <td><a><?php echo $rownum; ?></a></td>
-        <td><?php echo $row_allbirthdays['firstname']; ?>&nbsp;<?php echo $row_allbirthdays['middlename']; ?>&nbsp;<?php echo $row_allbirthdays['lastname']; ?></td>
-           <td><?php echo $row_allbirthdays['phonenumber']; ?></td>
-           <td><?php echo $row_allbirthdays['emailaddress']; ?></td>
-             <td><?php echo $row_allbirthdays['alternative_contact']; ?></td>
-             <td><?php echo $row_allbirthdays['physical_address']; ?></td>
-              <td><?php echo $row_allbirthdays['physical_address']; ?></td>
+         </tr>
+      <?php $rownum = $startRow_allbirthdays; do { $rownum++;  ?>
+      
+ 
+            <td><a><?php echo $rownum; ?></a></td>
+            <td><?php echo $row_allbirthdays['firstname']; ?>&nbsp;<?php echo $row_allbirthdays['middlename']; ?>&nbsp;<?php echo $row_allbirthdays['lastname']; ?></td>
+            <td><?php echo $row_allbirthdays['phonenumber']; ?></td>
+            <td><?php echo $row_allbirthdays['emailaddress']; ?></td>
+            <td><?php echo $row_allbirthdays['alternative_contact']; ?></td>
+             
+             
        
       </tr>
    
       <?php } while ($row_allbirthdays = mysql_fetch_assoc($allbirthdays)); ?>
       
-        <td colspan="2"><?php if ($totalRows_allbirthdays > 0) { // Show if recordset not empty ?>
-          <?php echo ($startRow_allbirthdays + 1) ?>
-          <?php } // Show if recordset not empty ?>
-          <strong>TO</strong> <?php echo min($startRow_allbirthdays + $maxRows_allbirthdays, $totalRows_allbirthdays) ?> <strong>OF</strong> <?php echo $totalRows_allbirthdays ?></td>
-        <td colspan="3"><?php if ($pageNum_allbirthdays > 0) { // Show if not first page ?>
-          <a href="<?php printf("%s?pageNum_allbirthdays=%d%s", $currentPage, max(0, $pageNum_allbirthdays - 1), $queryString_allbirthdays); ?>">First</a> ||
-          <?php } // Show if not first page ?>
-          <?php if ($pageNum_allbirthdays > 0) { // Show if not first page ?>
-            <a href="<?php printf("%s?pageNum_allbirthdays=%d%s", $currentPage, max(0, $pageNum_allbirthdays - 1), $queryString_allbirthdays); ?>">Previous</a> ||
-            <?php } // Show if not first page ?>
-          <?php if ($pageNum_allbirthdays < $totalPages_allbirthdays) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_allbirthdays=%d%s", $currentPage, min($totalPages_allbirthdays, $pageNum_allbirthdays + 1), $queryString_allbirthdays); ?>">Next</a> ||
-            <?php } // Show if not last page ?>
-          <?php if ($pageNum_allbirthdays < $totalPages_allbirthdays) { // Show if not last page ?>
-            <a href="<?php printf("%s?pageNum_allbirthdays=%d%s", $currentPage, $totalPages_allbirthdays, $queryString_allbirthdays); ?>">Last</a>
-          <?php } // Show if not last page ?></td>
-      </tr>
+       
     </table>
     <?php }else { echo "No Birthdays Today";} ?>
     
   </div>
 </div>
-<script type="text/javascript">
-var sprytextarea2 = new Spry.Widget.ValidationTextarea("sprytextarea2");
-var sprytextfield1 = new Spry.Widget.ValidationTextField("sprytextfield1");
-</script>
+</div>
+</div>
+
 </body>
 </html>
 <?php

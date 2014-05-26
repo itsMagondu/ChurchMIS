@@ -80,7 +80,7 @@ require_once('functions.php');
 	    include("church.php");
 		}
 		else if(isset($_GET['membercard'])){
-	    include("membercard.php");
+	    include("member_card.php");
 		}
         else if(isset($_GET['leader']) ||  isset($_GET['leaderid'])){
 		include("leadership.php");
@@ -111,7 +111,7 @@ require_once('functions.php');
 		include("logout.php");}
 		else if(isset($_GET['login'])){
 		include("login.php");}
-		else {
+		else if(isset($_GET['loginadmin'])){
 		include("loginadmin.php");}
 		
 		
@@ -130,6 +130,8 @@ require_once('functions.php');
   <tr>
     <td><?php include("footer.php"); ?></td>
   </tr>
+  
+  <?php include ("alerts.php");?>
   
      <?php 
   if (isset($_SESSION['msm_logged'])) { 

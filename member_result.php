@@ -7,7 +7,8 @@ checkAdmin();
 
 $currentPage = $_SERVER["PHP_SELF"];
 
-
+$CONVERT = 'yyyy-mm-dd';
+$converted = implode(/, array_reverse(explode(/, $CONVERT)));
 
 $maxRows_viewmemberdetails = 100;
 $pageNum_viewmemberdetails = 0;
@@ -19,7 +20,7 @@ $startRow_viewmemberdetails = $pageNum_viewmemberdetails * $maxRows_viewmemberde
 
 mysql_select_db($database_church, $church);
 $query_viewmemberdetails = "SELECT * FROM member_details 
-md LEFT JOIN marital_status ms ON md.statusid=ms.statusid  WHERE md.status='1' AND ( md.firstname LIKE '%".$_GET['smembername']."%' OR md.middlename LIKE '%".$_GET['smembername']."%' OR md.lastname LIKE '%".$_GET['smembername']."%' OR md.member_no LIKE '%".$_GET['smembername']."%' ) ORDER BY md.firstname ASC";
+md LEFT JOIN locality ly ON md.localityid=ly.localityid  WHERE md.status='1' AND ( md.firstname LIKE '%".$_GET['smembername']."%' OR md.middlename LIKE '%".$_GET['smembername']."%' OR md.lastname LIKE '%".$_GET['smembername']."%' OR md.member_no LIKE '%".$_GET['smembername']."%' OR ly.locationname LIKE '%".$_GET['smembername']."%' ) ORDER BY md.firstname ASC";
 $query_limit_viewmemberdetails = sprintf("%s LIMIT %d, %d", $query_viewmemberdetails, $startRow_viewmemberdetails, $maxRows_viewmemberdetails);
 $viewmemberdetails = mysql_query($query_limit_viewmemberdetails, $church) or die('cannot list members haha ');
 $row_viewmemberdetails = mysql_fetch_assoc($viewmemberdetails);
@@ -156,7 +157,7 @@ do {
         
                           
   <td width="2%"><a href="index.php?alldetails=show &amp; alldetailsid=<?php echo $row_viewmemberdetails['memberid']?> ">View</a></td>
-  <td width="2%"><a href="index.php?membercard=show&membercardid=<?php echo $row_viewmemberdetails['memberid']; ?>& #tabs-7">Print  </a></td> 
+  <td width="2%"><a href="index.php?membercard=show &amp; membercardid=<?php echo $row_viewmemberdetails['memberid']; ?>">Preview</a></td> 
                  
     </tr>
       <?php } while ($row_viewmemberdetails = mysql_fetch_assoc($viewmemberdetails)); ?>

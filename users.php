@@ -44,9 +44,15 @@ if (isset($_SERVER['QUERY_STRING'])) {
   $editFormAction .= "?" . htmlentities($_SERVER['QUERY_STRING']);
 }
 
+				FUNCTION createSalt() {
+					$text = md5(uniqid(rand(), TRUE));
+					RETURN substr($text, 0, 3);
+					}
+
 if ((isset($_POST["Save"])) && ($_POST["Save"] == "Save")) {
-	$password=md5($_POST['password']);
-  $insertSQL = sprintf("INSERT INTO users (username, password,EmailAddress, user_level) VALUES (%s,%s, %s, %s)",
+				$salt = createSalt();
+				$password = hash('sha256', $salt . $hash);
+ $insertSQL = sprintf("INSERT INTO users (username, password,EmailAddress, user_level) VALUES (%s,%s, %s, %s)",
                        GetSQLValueString($_POST['username'], "text"),
 					      GetSQLValueString($password, "text"),
 				     GetSQLValueString($_POST['EmailAddress'], "text"),  
@@ -99,6 +105,14 @@ $query_users = sprintf("SELECT * FROM users WHERE user_id = %s", GetSQLValueStri
 $users = mysql_query($query_users, $church) or die(mysql_error());
 $row_users = mysql_fetch_assoc($users);
 $totalRows_users = mysql_num_rows($users);
+
+define("MAX_LENGTH", 6);
+ 
+function generateHashWithSalt($password) {
+    $intermediateSalt = md5(uniqid(rand(), true));
+    $salt = substr($intermediateSalt, 0, MAX_LENGTH);
+    return hash("sha256", $password . $salt);
+}
 
 
 ?>

@@ -1,3 +1,4 @@
+
 <?php 
 require_once('Connections/church.php');
 require_once('functions.php');
@@ -56,33 +57,31 @@ $viewmemberadded = mysql_query($query_viewmemberadded, $church) or die(mysql_err
 $row_viewmemberadded = mysql_fetch_assoc($viewmemberadded);
 
 
+
+
+function sanitize($string){
+
+	$string = strip_tags($string);
+	$string = htmlspecialchars($string);
+	$string = trim(rtrim(ltrim($string)));
+	$string = mydql_reak_escape_string($string);
+	
+	}
+
 ?>
 
 
 
 
-
-
-
  <?php if ((isset($_POST["savemember"]))) { 
- 
- 
- 
 
-
- 
-
- 
- $dateofbirth=$_POST['dateofbirth'];/*  $date= date("d/m/Y",$end) ;  */
+		$dateofbirth=$_POST['dateofbirth'];/*  $date= date("d/m/Y",$end) ;  */
 		$arrFrom=explode('/',$dateofbirth);
 	    $birthdyday=$arrFrom[0];
   	    $birthdaymonth=$arrFrom[1];
 	    $birthdayyear=$arrFrom[2];	   
 	    //$startdate=$birthdayyear.'-'.$birthdaymonth.'-'.$birthdyday;
- 
- 
- 
- 
+
 	mysql_select_db($database_church, $church);
 $query_viewsavedmember= "SELECT * from member_details ms  WHERE  ms.member_no=".$_POST['member_no']."";
 $viewsavedmember = mysql_query($query_viewsavedmember, $church) or die('cannot view member details');
@@ -114,8 +113,10 @@ function savemember(){
 }</script>	 
 <?php  
 	
+	 
 	$tab="index.php?member=true#tabs-1";
 	$whereto=$tab;	
+	$strings;
   $insertSQL = sprintf("INSERT INTO member_details (member_no,lastname, middlename, firstname,languages_spoken, dateofbirth,birthdayyear,birthdaymonth,birthdate, identificationnumber,genderid,localityid,department_id, statusid,church_id,service_attended,churh_attendance,placeofbirth) VALUES (%s, %s, %s, %s, %s, %s, %s, %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",
                        
 					   GetSQLValueString($_POST['member_no'], "text"),
@@ -138,7 +139,7 @@ function savemember(){
 					    GetSQLValueString($_POST['placeofbirth'], "text"));
 
   mysql_select_db($database_church, $church);
-  $Result1 = mysql_query($insertSQL, $church) or  die(mysql_error());
+  $Result1 = mysql_query($insertSQL, $church) or  die('Cannot Insert');
   
    header("Location:$whereto");
  
@@ -149,31 +150,44 @@ function savemember(){
 
 if ((isset($_POST["updatemember"]))) { 
 
+
+
+
   	 $tab="index.php?member=true#tabs-1";
 	$whereto=$tab;
    
      if ((isset($_GET['memberid'])) && ($_GET['memberid']!="")){
+		 
+		 
+ $dateofbirth=$_POST['dateofbirth'];/*  $date= date("d/m/Y",$end) ;  */
+		$arrFrom=explode('/',$dateofbirth);
+	    $birthdyday=$arrFrom[0];
+  	    $birthdaymonth=$arrFrom[1];
+	    $birthdayyear=$arrFrom[2];	   
+	    //$startdate=$birthdayyear.'-'.$birthdaymonth.'-'.$birthdyday;
       
-  $updateSQL = sprintf("UPDATE member_details SET  member_no=%s,lastname =%s, middlename=%s, firstname=%s,languages_spoken=%s, dateofbirth=%s,  identificationnumber=%s,genderid=%s, localityid=%s,department_id=%s, statusid=%s,church_id=%s ,service_attended=%s,churh_attendance=%s,placeofbirth=%s WHERE memberid=".($_GET['memberid'])."", 
+  $updateSQL = sprintf("UPDATE member_details SET  member_no=%s,lastname =%s, middlename=%s, firstname=%s,languages_spoken=%s,dateofbirth=%s,birthdayyear=%s,birthdaymonth=%s,birthdate=%s, identificationnumber=%s,genderid=%s,localityid=%s,department_id=%s, statusid=%s,church_id=%s ,service_attended=%s,churh_attendance=%s,placeofbirth=%s WHERE memberid=".($_GET['memberid'])."", 
   
-  
-                       GetSQLValueString($_POST['member_no'], "text"),
-					   GetSQLValueString($_POST['lastname'], "text"),
-                       GetSQLValueString($_POST['middlename'], "text"),
-                       GetSQLValueString($_POST['firstname'], "text"),
-					      GetSQLValueString($_POST['languages_spoken'], "text"),
-                       GetSQLValueString($_POST['dateofbirth'], "text"),
-					   GetSQLValueString($_POST['identificationnumber'], "int"),
-                       GetSQLValueString($_POST['genderid'], "int"),
-  
-                      GetSQLValueString($_POST['localityid'], "int"),
-					    GetSQLValueString($_POST['department_id'], "int"),
-                       GetSQLValueString($_POST['statusid'], "int"),
-					    GetSQLValueString($_POST['church_id'], "int"),
-					    GetSQLValueString($_POST['service_attended'], "text"),
-						 GetSQLValueString($_POST['churh_attendance'], "text"),
-						  GetSQLValueString($_POST['placeofbirth'], "text"),
-                       GetSQLValueString($_POST['memberid'], "int"));
+												
+            GetSQLValueString($_POST['member_no'], "text"),
+            GetSQLValueString($_POST['lastname'], "text"),
+            GetSQLValueString($_POST['middlename'], "text"),
+            GetSQLValueString($_POST['firstname'], "text"),
+            GetSQLValueString($_POST['languages_spoken'], "text"),
+            GetSQLValueString($dateofbirth, "text"),
+            GetSQLValueString($birthdayyear, "text"),
+            GetSQLValueString($birthdaymonth, "text"),
+            GetSQLValueString($birthdyday, "text"),
+            GetSQLValueString($_POST['identificationnumber'], "int"),
+            GetSQLValueString($_POST['genderid'], "int"),
+            GetSQLValueString($_POST['localityid'], "int"),
+            GetSQLValueString($_POST['department_id'], "int"),
+            GetSQLValueString($_POST['statusid'], "int"),
+            GetSQLValueString($_POST['church_id'], "int"),
+            GetSQLValueString($_POST['service_attended'], "text"),
+            GetSQLValueString($_POST['churh_attendance'], "text"),
+            GetSQLValueString($_POST['placeofbirth'], "text"),
+            GetSQLValueString($_POST['memberid'], "int"));
 
   mysql_select_db($database_church, $church);
   $Result1 = mysql_query($updateSQL, $church) or die(mysql_error());
@@ -212,10 +226,6 @@ if ((isset($_GET['archive']) &&(isset($_GET['member'])) && ($_GET['member'] != "
  mysql_select_db($database_church, $church);
   $Result1 = mysql_query($uPdateSQL1, $church) or die('cannot archive');
 }
-
-
-
-
 
 
 
@@ -636,7 +646,7 @@ if ((isset($_POST["updatehobby"]))) {
 	
 	
 	if((isset($_GET['hobby_id']))  &&  (isset($_GET['hobby_id']))){
-  $updateSQL = sprintf("UPDATE hobbies SET memberid=%s, hobby_name=%s, intrests=%s, special_skills=%s  WHERE hobby_id=".($_GET['hobby_id'])."",
+  $updateSQL = sprintf("UPDATE hobbies SET memberid=%s, hobby_name=%s, intrests=%s, special_skills=%s  WHERE hobby_id=".($_GET['hobby_id'])." limit hobby_id =1",
   
   
                        GetSQLValueString($_POST['memberid'], "int"),
@@ -938,6 +948,9 @@ $totalRows_birthdays = mysql_num_rows($birthdays);
 <link type="text/javascript" href="/st_peters/assets/js/bootstrap.js" />
 <link type="text/javascript" href="tms.css"/>
 
+<!------bootstrap prompt----->
+
+<script type="text/javascript" src="js/bootstrap-prompts-alert.js"></script>
 
 
 
@@ -1060,9 +1073,24 @@ function ConfirmArchive()
 
 <?php if($totalRows_birthdays>0) {?>
 <script language="javascript">
+ $(document).ready(function() {
+      $('#alertMe').function(){
+        alert("You are in an alert triggered by alert() javascript function");
+      });
+
+
+</script>
+<?php }?>
+
+
+
+
+
+<?php if($totalRows_birthdays>0) {?>
+<script language="javascript">
 <!-- begin
 
-$.titleAlert("FILES OUT FOR MORE THAN 10 DAYS!",{
+$.titleAlert("MEMBERS WITH BIRTHDAYS TODAY!",{
 	 requireBlur:false,
     stopOnFocus:false,
     duration:4000,
@@ -1080,10 +1108,94 @@ window.open('birthday_results_pop.php','PopupName','toolbar=0,location=0,status=
 
 
 
+<?php if($totalRows_birthdays>0) {?>
+<script language="javascript">
+<!-- begin
+
+window._originalAlert = window.alert;
+window.alert = function(text) {
+    var bootStrapAlert = function() {
+        if(! $.fn.modal.Constructor)
+            return false;
+        if($('#windowAlertModal').length == 1)
+            return true;
+        $('body').append(' \
+    <div id="windowAlertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"> \
+      <div class="modal-body"> \
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> \
+        <p> alert text </p> \
+      </div> \
+      <div class="modal-footer"> \
+        <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button> \
+      </div> \
+    </div> \
+    ');
+        return true;
+    }
+    if ( bootStrapAlert() ){
+        $('#windowAlertModal .modal-body p').text(text);
+        $('#windowAlertModal').modal();
+    }  else {
+        console.log('bootstrap was not found');
+        window._originalAlert(text);
+    }
+}
+window._originalConfirm = window.confirm;
+window.confirm = function(text, cb) {
+    var initTemplate = function(){
+      if($('#windowConfirmModal').length == 1)
+        return true;
+      $('body').append(' \
+        <div id="windowConfirmModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true"> \
+          <div class="modal-body"> \
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> \
+            <p> alert text </p> \
+          </div> \
+          <div class="modal-footer"> \
+            <button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button> \
+            <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Ok</button> \
+          </div> \
+        </div> \
+      ');
+    }
+
+    var bootStrapConfirm = function() {
+      if(! $.fn.modal.Constructor)
+          return false;
+
+      $('body').off('click', '#windowConfirmModal .btn-primary');
+      $('body').off('click', '#windowConfirmModal .btn-danger');
+
+      function confirm() { cb(true); }
+      function deny() { cb(false); }
+
+      $('body').on('click', '#windowConfirmModal .btn-primary', confirm);
+      $('body').on('click', '#windowConfirmModal .btn-danger', deny);
+
+      return true;
+    }
+
+    initTemplate()
+
+    if ( bootStrapConfirm() ){
+        $('#windowConfirmModal .modal-body p').text(text);
+        $('#windowConfirmModal').modal();
+    }  else {
+        console.log('bootstrap was not found');
+        cb(window._originalConfirm(text));
+    }
+}
+// end -->
+</script>
+<?php }?>
+
+
+
+
 </head>
 
 </head><div class="bodytext">
-<body onload="popup()"> 
+<body onLoad="popup()"> 
 
 <div id="tabs" class="datataable">
 <ul>
